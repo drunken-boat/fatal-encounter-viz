@@ -1,0 +1,82 @@
+[
+  {
+    "op": "core/row-removal",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "Race",
+          "expression": "value",
+          "columnName": "Race",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [
+            {
+              "v": {
+                "v": "Christopher Anthony Alexander",
+                "l": "Christopher Anthony Alexander"
+              }
+            }
+          ],
+          "selectBlank": false,
+          "selectError": false
+        }
+      ],
+      "mode": "record-based"
+    },
+    "description": "Remove rows"
+  },
+  {
+    "op": "core/row-removal",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "list",
+          "name": "Race",
+          "expression": "value",
+          "columnName": "Race",
+          "invert": false,
+          "omitBlank": false,
+          "omitError": false,
+          "selection": [],
+          "selectBlank": true,
+          "selectError": false
+        }
+      ],
+      "mode": "record-based"
+    },
+    "description": "Remove rows"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "Race",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "European-American/White",
+          "European-American/European-American/White",
+          "european-American/White"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "European-American/White"
+      },
+      {
+        "from": [
+          "African-American/Black",
+          "African-American/Black African-American/Black Not imputed"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "African-American/Black"
+      }
+    ],
+    "description": "Mass edit cells in column Race"
+  }
+]

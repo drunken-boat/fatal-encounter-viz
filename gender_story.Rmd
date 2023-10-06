@@ -1,0 +1,107 @@
+---
+title: "Major_1_Tingyu_Liu1003"
+author: "Drunken_Boat"
+date: "2023-10-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=FALSE, results='hide', warning=FALSE}
+library(tidyverse)
+library(sf)
+library(tmap)
+library(leaflet)
+library(here)
+library(tidycensus)
+library(readr)
+library(skimr)
+library(ggplot2)
+library(lubridate)
+library(dplyr)
+library(htmlwidgets)
+```
+
+```{r 1_load_data, message=FALSE, warning=FALSE}
+data <- read_csv("fe.csv")
+head(data)
+```
+
+```{r 2_eda}
+skim(data)
+```
+
+```{r 3_gender_distribution}
+p_distribution <- ggplot(data = data) +
+  geom_bar(aes(x = "", fill = Gender), stat = "count", position = "fill") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("#00008B","#AA0000", "#333333","#999999"))+
+  theme(panel.background = element_rect(fill = "black"))+
+  ggdark::dark_theme_classic()
+
+print(p_distribution)
+```
+- The pie chart above illustrates the distribution of police killings based on gender.
+- The majority of police killings were of Male, accounting for nearly ninety percent of the total incidents.
+
+```{r 4_age_and_gender}
+p_age <- ggplot(data) +
+  geom_histogram(mapping = aes(x = Age, fill = Gender), 
+                 bins = 60,
+                 color="black")+
+  scale_fill_manual(values = c("#00008B","#AA0000", "#333333","#999999"))+
+  ggdark::dark_theme_classic()
+print(p_age)
+```
+- The stacked bar chart depicts the distribution of police killings based on both gender and age groups.
+- The highest number of incidents occurred in the 25-40 group.
+- There is a noticeable disparity in police violence across different age ranges and genders, with young adult female.
+
+```{r 5_trend_over_time}
+colnames(data)[9] <- "time"
+
+data_time <- data %>%
+  mutate(time = as.Date(time, format = "%m/%d/%Y"))
+
+data_time <- data_time %>%
+  mutate(year = year(time))
+
+# Count the number of incidents per year and gender
+incident_counts <- data_time %>%
+  group_by(year, Gender) %>%
+  count()
+
+color_palette <- c("Female" = "#00008B", "Male" = "#AA0000", "Transgender" = "#333333", "NA" = "#00000000")
+
+p_trend <- ggplot(data = incident_counts) +
+  geom_line(aes(x = year, y = n, color = Gender), size=2)+
+  scale_color_manual(values = color_palette) +
+  labs(x = "Year", y = "Number of Incidents")+ 
+  ggdark::dark_theme_classic()
+
+print(p_trend)
+```
+- The line chart above showcases the trend of police killings over time.
+- There has been an obvious increase trend in police killings over the years, from 2000 - 2021.
+- The number of incidents peaked in 2020.
+
+```{r 6_race}
+data_race <- read_csv("fe-cleaned.csv")
+
+p_race <- ggplot(data = data_race) + 
+  geom_bar(mapping = aes(x=Gender, fill=Race), position = "fill") +
+  scale_fill_manual(values = c("#AA0000", "#FF8C00", "#006400", "#000080", "#008B8B", "#006400", "#333333"))+
+  ggdark::dark_theme_classic()
+
+print(p_race)
+```
+- The stacked bar chart above shows the distribution of police killings based on both gender and race groups.
+- Among the Female group, more victims Asian and White victims occurs compared to other genders.
+```{r 7_save}
+save.image('1005.RData')
+```
+
+
+
