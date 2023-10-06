@@ -6,8 +6,11 @@ https://github.com/me-shaon/GLWTPL/blob/master/LICENSE
 
 ## Method & Data
 R
+
 Tableau
+
 Data: https://fatalencounters.org/
+
 This project is [GLWTPL](https://github.com/me-shaon/GLWTPL/blob/master/LICENSE) except for the data.
 
 ## Tableau Visualization
