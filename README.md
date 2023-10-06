@@ -1,7 +1,7 @@
 # fatal-encounter-viz
 
 ## Introduction
-This is the first major homework assignment for the Urban Analytics course. For this assignment, I will visualize data on police killings of civilians and tell a story from a gender perspective.
+This is the first major homework assignment for the Urban Analytics course. I visualize data on police killings of civilians and tell a story from a gender perspective.
 https://github.com/me-shaon/GLWTPL/blob/master/LICENSE
 
 ## Method & Data
