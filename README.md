@@ -2,7 +2,6 @@
 
 ## Introduction
 This is the first major homework assignment for the Urban Analytics course. I visualize data on police killings of civilians and tell a story from a gender perspective.
-https://github.com/me-shaon/GLWTPL/blob/master/LICENSE
 
 ## Method & Data
 R
